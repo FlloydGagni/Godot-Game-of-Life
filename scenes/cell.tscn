@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://de5i4m1vqhg3u" path="res://scripts/cell.gd" id="1_upbjj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0s7o3"]
+bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5

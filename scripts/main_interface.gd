@@ -18,6 +18,7 @@ var no_of_cells : int = 1
 
 func _ready() -> void :
 	get_window().min_size = Vector2i(500, 500)
+	
 	_resize_grid(1)
 	
 	start.pressed.connect(_on_start_pressed)

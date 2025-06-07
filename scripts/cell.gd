@@ -16,11 +16,16 @@ func _ready() -> void:
 		"neighbors" : cell_neighbors,
 	}
 	
+	_on_update_current_cell_data(alive)
+	
+	cell_panel.gui_input.connect(_on_gui_input)
+	
 	CellManager.update_cell_data.connect(_on_update_cell_data)
+	CellManager.update_current_cell_data.connect(_on_update_current_cell_data)
 
 func _initialize_cell_location(grid_location : Vector2i) -> void :
 	cell_location = grid_location
-	$CellPanel/Location.text = str(cell_location)
+	$CellPanel/Location.text = str(alive)
 	
 	_initialize_neighbors()
 
@@ -44,3 +49,22 @@ func _initialize_neighbors() -> void :
 			cell_neighbors.append(neighbor)
 	
 	cell_data["neighbors"] = cell_neighbors
+
+func _on_update_current_cell_data(_passed_satus : bool) -> void :
+	alive = _passed_satus
+	
+	var stylebox : StyleBoxFlat = StyleBoxFlat.new()
+	
+	if alive:
+		stylebox.bg_color = Color(0.8, 0.8, 0.8)  # Green when alive
+	else:
+		stylebox.bg_color = Color(0.3, 0.3, 0.3)  # Red when dead
+	
+	cell_panel.add_theme_stylebox_override("panel", stylebox)
+
+func _on_gui_input(event : InputEvent) -> void :
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			alive = !alive
+			$CellPanel/Location.text = str(alive)
+			_on_update_current_cell_data(alive)

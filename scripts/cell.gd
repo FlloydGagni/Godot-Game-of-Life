@@ -1,11 +1,8 @@
 extends Control
 
-signal update_cell_data(cell_data : Dictionary)
-
 @export var cell_data : Dictionary
 
 @onready var cell_panel: Panel = $CellPanel
-@onready var update_timer: Timer = $UpdateTimer
 
 var alive : bool = false
 var cell_location : Vector2i
@@ -31,10 +28,10 @@ func _ready() -> void:
 		"neighbors" : cell_neighbors,
 	}
 	
-	update_timer.timeout.connect(_on_update_timer_timeout)
-
-func _on_update_timer_timeout():
-	update_cell_data.emit(cell_data)
+	CellManager.update_cell_data.connect(_on_update_cell_data)
 
 func _initialize_cell_location(grid_location : Vector2i) -> void :
 	cell_location = grid_location
+
+func _on_update_cell_data() -> void :
+	CellManager.current_cell_data.emit(cell_data)

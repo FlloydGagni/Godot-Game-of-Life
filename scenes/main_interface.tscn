@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvdd2twppcgae"]
+[gd_scene load_steps=7 format=3 uid="uid://dvdd2twppcgae"]
 
 [ext_resource type="PackedScene" uid="uid://blaitsr7yym5j" path="res://scenes/cell.tscn" id="1_7qx7d"]
+[ext_resource type="Script" uid="uid://bl238jrnivc1m" path="res://scripts/main_interface.gd" id="1_51bk3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51bk3"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51bk3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgrph"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efbr5"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="MainInterface" type="PanelContainer"]
 anchors_preset = 15
@@ -12,36 +21,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_51bk3")
+script = ExtResource("1_51bk3")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="InterfaceMargin" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MainContainer" type="VBoxContainer" parent="InterfaceMargin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ControlContainer" type="HBoxContainer" parent="InterfaceMargin/MainContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="RowContainer" type="HBoxContainer" parent="InterfaceMargin/MainContainer/ControlContainer"]
+layout_mode = 2
+
+[node name="RowLabel" type="Label" parent="InterfaceMargin/MainContainer/ControlContainer/RowContainer"]
+layout_mode = 2
+text = "Rows:"
+
+[node name="RowValue" type="SpinBox" parent="InterfaceMargin/MainContainer/ControlContainer/RowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ColContainer" type="HBoxContainer" parent="InterfaceMargin/MainContainer/ControlContainer"]
+layout_mode = 2
+
+[node name="ColLabel" type="Label" parent="InterfaceMargin/MainContainer/ControlContainer/ColContainer"]
+layout_mode = 2
+text = "Columns:"
+
+[node name="ColValue" type="SpinBox" parent="InterfaceMargin/MainContainer/ControlContainer/ColContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Start" type="Button" parent="InterfaceMargin/MainContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_51bk3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rgrph")
+theme_override_styles/normal = SubResource("StyleBoxFlat_efbr5")
+text = "Play"
+
+[node name="Grid" type="GridContainer" parent="InterfaceMargin/MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 2
-columns = 3
+columns = 2
 
-[node name="Cell" parent="GridContainer" instance=ExtResource("1_7qx7d")]
+[node name="Cell" parent="InterfaceMargin/MainContainer/Grid" instance=ExtResource("1_7qx7d")]
 layout_mode = 2
 
-[node name="Cell2" parent="GridContainer" instance=ExtResource("1_7qx7d")]
+[node name="Cell2" parent="InterfaceMargin/MainContainer/Grid" instance=ExtResource("1_7qx7d")]
 layout_mode = 2
 
-[node name="Cell3" parent="GridContainer" instance=ExtResource("1_7qx7d")]
+[node name="Cell3" parent="InterfaceMargin/MainContainer/Grid" instance=ExtResource("1_7qx7d")]
 layout_mode = 2
 
-[node name="Cell4" parent="GridContainer" instance=ExtResource("1_7qx7d")]
-layout_mode = 2
-
-[node name="Cell5" parent="GridContainer" instance=ExtResource("1_7qx7d")]
-layout_mode = 2
-
-[node name="Cell6" parent="GridContainer" instance=ExtResource("1_7qx7d")]
-layout_mode = 2
-
-[node name="Cell7" parent="GridContainer" instance=ExtResource("1_7qx7d")]
-layout_mode = 2
-
-[node name="Cell8" parent="GridContainer" instance=ExtResource("1_7qx7d")]
-layout_mode = 2
-
-[node name="Cell9" parent="GridContainer" instance=ExtResource("1_7qx7d")]
+[node name="Cell4" parent="InterfaceMargin/MainContainer/Grid" instance=ExtResource("1_7qx7d")]
 layout_mode = 2

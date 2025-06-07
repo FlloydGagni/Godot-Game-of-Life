@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvdd2twppcgae"]
+[gd_scene load_steps=8 format=3 uid="uid://dvdd2twppcgae"]
 
 [ext_resource type="PackedScene" uid="uid://blaitsr7yym5j" path="res://scenes/cell.tscn" id="1_7qx7d"]
 [ext_resource type="Script" uid="uid://bl238jrnivc1m" path="res://scripts/main_interface.gd" id="1_51bk3"]
@@ -13,6 +13,8 @@ bg_color = Color(0.207843, 0.207843, 0.207843, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efbr5"]
 bg_color = Color(0.145098, 0.145098, 0.145098, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_efbr5"]
 
 [node name="MainInterface" type="PanelContainer"]
 anchors_preset = 15
@@ -62,13 +64,25 @@ text = "Columns:"
 layout_mode = 2
 alignment = 1
 
-[node name="Start" type="Button" parent="InterfaceMargin/MainContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="InterfaceMargin/MainContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="InterfaceMargin/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/focus = SubResource("StyleBoxEmpty_51bk3")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rgrph")
 theme_override_styles/normal = SubResource("StyleBoxFlat_efbr5")
 text = "Play"
+
+[node name="Stop" type="Button" parent="InterfaceMargin/MainContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_efbr5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rgrph")
+theme_override_styles/normal = SubResource("StyleBoxFlat_efbr5")
+text = "Pause"
 
 [node name="Grid" type="GridContainer" parent="InterfaceMargin/MainContainer"]
 layout_mode = 2
@@ -88,3 +102,6 @@ layout_mode = 2
 
 [node name="Cell4" parent="InterfaceMargin/MainContainer/Grid" instance=ExtResource("1_7qx7d")]
 layout_mode = 2
+
+[node name="UpdateTimer" type="Timer" parent="."]
+wait_time = 2.0

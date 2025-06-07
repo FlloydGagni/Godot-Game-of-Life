@@ -91,11 +91,11 @@ text = "Pause"
 [node name="Grid" type="GridContainer" parent="InterfaceMargin/MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 2
-theme_override_constants/v_separation = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 
 [node name="Cell" parent="InterfaceMargin/MainContainer/Grid" instance=ExtResource("1_7qx7d")]
 layout_mode = 2
 
 [node name="UpdateTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.1

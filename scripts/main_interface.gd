@@ -19,7 +19,7 @@ var no_of_cells : int = 1
 func _ready() -> void :
 	get_window().min_size = Vector2i(500, 500)
 	
-	_resize_grid(1)
+	_resize_grid(0)
 	
 	start.pressed.connect(_on_start_pressed)
 	stop.pressed.connect(_on_stop_pressed)
@@ -36,11 +36,11 @@ func _on_stop_pressed() -> void :
 	update_timer.stop()
 
 func _on_update_timer_timeout() -> void :
-	CellManager.update_cell_data.emit()
+	CellManager.update_cell_data()
 
 func _on_col_value_changed(value : int) -> void :
 	grid.columns = value
-	_resize_grid(value)
+	_resize_grid(0)
 
 func _resize_grid(_value : int) -> void:
 	CellManager.grid_map = {}

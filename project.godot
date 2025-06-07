@@ -11,7 +11,17 @@ config_version=5
 [application]
 
 config/name="Godot Game of Life"
+run/main_scene="uid://dvdd2twppcgae"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+
+[autoload]
+
+CellManager="*res://scripts/cell_manager.gd"
+
+[display]
+
+window/size/viewport_width=500
+window/size/viewport_height=500
 
 [rendering]
 

@@ -8,6 +8,10 @@ signal current_cell_data(cell_data : Dictionary)
 var alive : bool = false
 var cell_location : Vector2i
 var cell_neighbors : Array[Vector2i]
+var grid_map : Dictionary
+var row : int
+var col : int
+var no_of_cells : int
 
 func _ready() -> void:
 	self.current_cell_data.connect(_on_current_cell_data)

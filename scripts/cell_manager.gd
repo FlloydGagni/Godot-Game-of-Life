@@ -4,11 +4,15 @@ extends Node
 
 var row : int
 var col : int
-var no_of_cells : int
 
 var grid_map : Dictionary
 var current_status_map : Dictionary
 var next_status_map : Dictionary
+var directions : Array[Vector2i] = [
+	Vector2i(-1, -1), Vector2i(-1, 0), Vector2i(-1, 1),
+	Vector2i(0, -1) ,                  Vector2i(0, 1) ,
+	Vector2i(1, -1) ,  Vector2i(1, 0), Vector2i(1, 1) ,
+]
 
 func update_cell_data() -> void :
 	for cell in grid_map:
@@ -20,12 +24,12 @@ func update_cell_data() -> void :
 			if grid_map[neighbor].alive :
 				alive_neighbors_count += 1
 		
-		if current_status_map[Vector2i(grid_map[cell].cell_location)] == true :
+		if current_status_map[Vector2i(grid_map[cell].cell_location)]:
 			if alive_neighbors_count < 2 or alive_neighbors_count > 3 :
 				next_status_map[Vector2i(grid_map[cell].cell_location)] = false
 			elif alive_neighbors_count == 2 or alive_neighbors_count == 3 :
 				next_status_map[Vector2i(grid_map[cell].cell_location)] = true
-		elif current_status_map[Vector2i(grid_map[cell].cell_location)] == false :
+		else :
 			if alive_neighbors_count == 3 :
 				next_status_map[Vector2i(grid_map[cell].cell_location)] = true
 			else :
@@ -33,4 +37,4 @@ func update_cell_data() -> void :
 	
 	for cell in grid_map:
 		grid_map[cell].alive = next_status_map[Vector2i(grid_map[cell].cell_location)]
-		grid_map[cell]._update_cell_display()
+		grid_map[cell].update_cell_display()

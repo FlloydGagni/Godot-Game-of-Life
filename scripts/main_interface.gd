@@ -14,17 +14,16 @@ extends PanelContainer
 
 var row : int = 1
 var col : int = 1
-var no_of_cells : int = 1
 
 func _ready() -> void :
 	get_window().min_size = Vector2i(500, 500)
 	
-	_resize_grid(0)
+	resize_grid(0)
 	
 	start.pressed.connect(_on_start_pressed)
 	stop.pressed.connect(_on_stop_pressed)
 	
-	row_value.value_changed.connect(_resize_grid)
+	row_value.value_changed.connect(resize_grid)
 	col_value.value_changed.connect(_on_col_value_changed)
 	
 	update_timer.timeout.connect(_on_update_timer_timeout)
@@ -40,9 +39,9 @@ func _on_update_timer_timeout() -> void :
 
 func _on_col_value_changed(value : int) -> void :
 	grid.columns = value
-	_resize_grid(0)
+	resize_grid(0)
 
-func _resize_grid(_value : int) -> void:
+func resize_grid(_value : int) -> void:
 	CellManager.grid_map = {}
 	
 	row = int(row_value.value)
@@ -50,9 +49,6 @@ func _resize_grid(_value : int) -> void:
 	
 	col = int(col_value.value)
 	CellManager.col = col
-	
-	no_of_cells = row * col
-	CellManager.no_of_cells = no_of_cells
 	
 	for child in grid.get_children():
 		child.queue_free()
@@ -62,6 +58,6 @@ func _resize_grid(_value : int) -> void:
 			CellManager.grid_map[Vector2i(row_index, col_index)] = cell_node.instantiate()
 			
 			var current_cell_node = CellManager.grid_map[Vector2i(row_index, col_index)]
-			current_cell_node._initialize_cell_location(Vector2i(row_index, col_index))
+			current_cell_node.initialize_cell_location(Vector2i(row_index, col_index))
 			
-			grid.add_child.call_deferred(current_cell_node)
+			grid.add_child(current_cell_node)
